@@ -39,7 +39,7 @@ This options fields are passed to node-uuid functions directly:
 
 # License
 
-MIT (c) 2013 Vsevolod Strukchinsky (floatdrop@gmail.com)
+MIT (c) 2014 Vsevolod Strukchinsky (floatdrop@gmail.com)
 
 [npm-url]: https://npmjs.org/package/express-request-id
 [npm-image]: http://img.shields.io/npm/v/express-request-id.svg
