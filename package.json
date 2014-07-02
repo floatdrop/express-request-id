@@ -24,12 +24,12 @@
   },
   "homepage": "https://github.com/floatdrop/express-request-id",
   "devDependencies": {
-    "express": "^4.4.5",
-    "mocha": "^1.20.1",
-    "should": "^4.0.4",
-    "supertest": "^0.13.0"
+    "express": "~4.4.5",
+    "mocha": "~1.20.1",
+    "should": "~4.0.4",
+    "supertest": "~0.13.0"
   },
   "dependencies": {
-    "node-uuid": "^1.4.1"
+    "node-uuid": "~1.4.1"
   }
 }
