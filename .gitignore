@@ -1,0 +1,17 @@
+.idea
+.DS_Store
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+npm-debug.log
+coverage
+node_modules
