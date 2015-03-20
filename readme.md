@@ -1,5 +1,6 @@
 # express-request-id [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
-> Generate UUID for request and add it to headers
+
+Generate UUID for request and add it to `X-Request-Id` header.
 
 ```js
 
