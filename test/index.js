@@ -4,6 +4,7 @@
 
 var request = require('supertest');
 var should = require('should');
+var requestId = require('..');
 
 function noop (req, res, next) {
     next();
@@ -12,7 +13,7 @@ function noop (req, res, next) {
 describe('express-request-id', function () {
     it('should set request id', function (done) {
         var app = require('express')();
-        app.use(require('..')());
+        app.use(requestId());
         app.get('/', function (req, res, next) {
             should.exist(req);
             req.should.have.property('id').with.lengthOf(36);
@@ -24,7 +25,7 @@ describe('express-request-id', function () {
 
     it('should set header by default', function (done) {
         var app = require('express')();
-        app.use(require('..')());
+        app.use(requestId());
         app.get('/', noop);
 
         request(app)
@@ -35,7 +36,21 @@ describe('express-request-id', function () {
 
     it('should omit header with option setHeader=false', function (done) {
         var app = require('express')();
-        app.use(require('..')({ setHeader: false }));
+        app.use(requestId({ setHeader: false }));
+        app.get('/', noop);
+
+        request(app)
+            .get('/')
+            .end(function(err, res) {
+                if (err) { return done(err); }
+                res.headers.should.not.have.property('X-Request-Id');
+                done();
+            });
+    });
+
+    it('should omit header with option setHeader=0', function (done) {
+        var app = require('express')();
+        app.use(requestId({ setHeader: 0 }));
         app.get('/', noop);
 
         request(app)
@@ -49,7 +64,7 @@ describe('express-request-id', function () {
 
     it('should use uuid v4 by default', function (done) {
         var app = require('express')();
-        app.use(require('..')());
+        app.use(requestId());
         app.get('/', noop);
 
         request(app)
@@ -60,7 +75,7 @@ describe('express-request-id', function () {
 
     it('should use uuid v1 with option uuidVersion=`v1`', function (done) {
         var app = require('express')();
-        app.use(require('..')({ uuidVersion: 'v1' }));
+        app.use(requestId({ uuidVersion: 'v1' }));
         app.get('/', noop);
 
         request(app)
@@ -71,7 +86,7 @@ describe('express-request-id', function () {
 
     it('should pass options to node-uuid', function (done) {
         var app = require('express')();
-        app.use(require('..')({ uuidVersion: 'v1', msecs: new Date('10-05-1990'), nsecs: 0, clockseq: 0, node: [0,0,0,0,0,0] }));
+        app.use(requestId({ uuidVersion: 'v1', msecs: new Date('10-05-1990'), nsecs: 0, clockseq: 0, node: [0,0,0,0,0,0] }));
         app.get('/', noop);
 
         request(app)
