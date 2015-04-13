@@ -1,6 +1,6 @@
 {
   "name": "express-request-id",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Generate UUID for request and add it to headers",
   "main": "index.js",
   "scripts": {
