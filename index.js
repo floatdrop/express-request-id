@@ -8,7 +8,7 @@ module.exports = function (options) {
     options.setHeader = options.setHeader === undefined || !!options.setHeader;
 
     return function (req, res, next) {
-        req.id = uuid[options.uuidVersion](options, options.buffer, options.offset);
+        req.id = req.headers['x-request-id'] || uuid[options.uuidVersion](options, options.buffer, options.offset);
         if (options.setHeader) {
             res.setHeader('X-Request-Id', req.id);
         }

@@ -23,6 +23,18 @@ describe('express-request-id', function () {
         request(app).get('/').end(done);
     });
 
+    it('should use the `X-Request-Id` header value in case it was provided', function (done) {
+        var app = require('express')();
+        app.use(requestId());
+        app.get('/', function (req, res, next) {
+            should.exist(req);
+            req.should.have.property('id').equal('ARTIFICIAL-ID');
+            next();
+        });
+
+        request(app).get('/').set('X-Request-Id', 'ARTIFICIAL-ID').end(done);
+    });
+
     it('should set header by default', function (done) {
         var app = require('express')();
         app.use(requestId());
