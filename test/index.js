@@ -74,6 +74,17 @@ describe('express-request-id', function () {
             });
     });
 
+    it('should use the `X-Custom-Id` header name with option headerName=X-Custom-Id', function (done) {
+        var app = require('express')();
+        app.use(requestId({ headerName: 'X-Custom-Id' }));
+        app.get('/', noop);
+
+        request(app)
+            .get('/')
+            .expect('X-Custom-Id', /\w{8}-\w{4}-4\w{3}-\w{4}-\w{12}/)
+            .end(done);
+    });
+
     it('should use uuid v4 by default', function (done) {
         var app = require('express')();
         app.use(requestId());

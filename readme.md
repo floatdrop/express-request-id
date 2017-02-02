@@ -32,6 +32,7 @@ Returns middleware function, that appends request id to req object.
 
  * `uuidVersion` - version of uuid to use (defaults to `v4`). Can be one of methods from [node-uuid](https://github.com/broofa/node-uuid).
  * `setHeader` - boolean, indicates that header should be added to response (defaults to `true`).
+ * `headerName` - string, indicates the header name to use (defaults to `X-Request-Id`).
 
 This options fields are passed to node-uuid functions directly:
 
