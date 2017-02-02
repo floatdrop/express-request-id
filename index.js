@@ -6,11 +6,12 @@ module.exports = function (options) {
     options = options || {};
     options.uuidVersion = options.uuidVersion || 'v4';
     options.setHeader = options.setHeader === undefined || !!options.setHeader;
+    options.headerName = options.headerName || 'X-Request-Id';
 
     return function (req, res, next) {
-        req.id = req.headers['x-request-id'] || uuid[options.uuidVersion](options, options.buffer, options.offset);
+        req.id = req.header(options.headerName) || uuid[options.uuidVersion](options, options.buffer, options.offset);
         if (options.setHeader) {
-            res.setHeader('X-Request-Id', req.id);
+            res.setHeader(options.headerName, req.id);
         }
         next();
     };
