@@ -117,7 +117,7 @@ describe('express-request-id', function () {
             .expect('X-Request-Id', /00000000-0000-1000-8000-000000000000/)
             .end(done);
     });
-    it('should set request id', function (done) {
+    it('should set use the specified attribute name for the identifier', function (done) {
         var app = require('express')();
         app.use(requestId({ attributeName: 'specificId' }));
         app.get('/', function (req, res, next) {
