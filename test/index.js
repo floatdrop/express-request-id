@@ -117,6 +117,7 @@ describe('express-request-id', function () {
             .expect('X-Request-Id', /00000000-0000-1000-8000-000000000000/)
             .end(done);
     });
+    
     it('should set use the specified attribute name for the identifier', function (done) {
         var app = require('express')();
         app.use(requestId({ attributeName: 'specificId' }));
@@ -128,5 +129,30 @@ describe('express-request-id', function () {
         });
 
         request(app).get('/').end(done);
+    });
+
+    it('should add a specified prefix to the request id', function (done) {
+        var app = require('express')();
+        app.use(requestId({ prefix : 'myapp-' }));
+        app.get('/', function (req, res, next) {
+            should.exist(req);
+            req.should.have.property('id').startWith('myapp-');
+            req.should.have.property('id').with.lengthOf(42);
+            next();
+        });
+
+        request(app).get('/').end(done);
+    });
+
+    it('should not add prefix when the `X-Request-Id` header value was provided', function (done) {
+        var app = require('express')();
+        app.use(requestId({ prefix : 'myapp-' }));
+        app.get('/', function (req, res, next) {
+            should.exist(req);
+            req.should.have.property('id').equal('ARTIFICIAL-ID');
+            next();
+        });
+
+        request(app).get('/').set('X-Request-Id', 'ARTIFICIAL-ID').end(done);
     });
 });

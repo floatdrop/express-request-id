@@ -34,6 +34,7 @@ Returns middleware function, that appends request id to req object.
  * `setHeader` - boolean, indicates that header should be added to response (defaults to `true`).
  * `headerName` - string, indicates the header name to use (defaults to `X-Request-Id`).
  * `attributeName` - string, indicates the attribute name used for the identifier on the request object (defaults to `id`)
+ * `prefix` - string, provides a prefix to be prepended to the uuid to clarify initial entry point in a request chain
 
 This options fields are passed to node-uuid functions directly:
 
