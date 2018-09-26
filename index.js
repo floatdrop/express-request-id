@@ -10,7 +10,7 @@ module.exports = function (options) {
     options.attributeName = options.attributeName || 'id';
 
     return function (req, res, next) {
-        req[options.attributeName] = req.header(options.headerName) || uuid[options.uuidVersion](options, options.buffer, options.offset);
+        req[options.attributeName] = req.headers[options.headerName.toLowerCase()] || uuid[options.uuidVersion](options, options.buffer, options.offset);
         if (options.setHeader) {
             res.setHeader(options.headerName, req[options.attributeName]);
         }
