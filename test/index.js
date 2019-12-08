@@ -129,4 +129,17 @@ describe('express-request-id', function () {
 
         request(app).get('/').end(done);
     });
+    it('should use custom requestId generator', function (done) {
+        const app = require('express')();
+        const expectId = `CustomTraceId-${Math.random()}`;
+
+        app.use(requestId({ requestIdGenerator: () => expectId}));
+        app.get('/', function (req, res, next) {
+            should.exist(req);
+            req.should.have.property('id', expectId);
+            next();
+        });
+
+        request(app).get('/').end(done);
+    });
 });
