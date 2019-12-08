@@ -2,9 +2,9 @@
 
 'use strict';
 
-var request = require('supertest');
-var should = require('should');
-var requestId = require('..');
+const request = require('supertest');
+const should = require('should');
+const requestId = require('..');
 
 function noop (req, res, next) {
     next();
@@ -12,7 +12,7 @@ function noop (req, res, next) {
 
 describe('express-request-id', function () {
     it('should set request id', function (done) {
-        var app = require('express')();
+        const app = require('express')();
         app.use(requestId());
         app.get('/', function (req, res, next) {
             should.exist(req);
@@ -24,7 +24,7 @@ describe('express-request-id', function () {
     });
 
     it('should use the `X-Request-Id` header value in case it was provided', function (done) {
-        var app = require('express')();
+        const app = require('express')();
         app.use(requestId());
         app.get('/', function (req, res, next) {
             should.exist(req);
@@ -36,7 +36,7 @@ describe('express-request-id', function () {
     });
 
     it('should set header by default', function (done) {
-        var app = require('express')();
+        const app = require('express')();
         app.use(requestId());
         app.get('/', noop);
 
@@ -47,7 +47,7 @@ describe('express-request-id', function () {
     });
 
     it('should omit header with option setHeader=false', function (done) {
-        var app = require('express')();
+        const app = require('express')();
         app.use(requestId({ setHeader: false }));
         app.get('/', noop);
 
@@ -61,7 +61,7 @@ describe('express-request-id', function () {
     });
 
     it('should omit header with option setHeader=0', function (done) {
-        var app = require('express')();
+        const app = require('express')();
         app.use(requestId({ setHeader: 0 }));
         app.get('/', noop);
 
@@ -75,7 +75,7 @@ describe('express-request-id', function () {
     });
 
     it('should use the `X-Custom-Id` header name with option headerName=X-Custom-Id', function (done) {
-        var app = require('express')();
+        const app = require('express')();
         app.use(requestId({ headerName: 'X-Custom-Id' }));
         app.get('/', noop);
 
@@ -86,7 +86,7 @@ describe('express-request-id', function () {
     });
 
     it('should use uuid v4 by default', function (done) {
-        var app = require('express')();
+        const app = require('express')();
         app.use(requestId());
         app.get('/', noop);
 
@@ -97,7 +97,7 @@ describe('express-request-id', function () {
     });
 
     it('should use uuid v1 with option uuidVersion=`v1`', function (done) {
-        var app = require('express')();
+        const app = require('express')();
         app.use(requestId({ uuidVersion: 'v1' }));
         app.get('/', noop);
 
@@ -108,7 +108,7 @@ describe('express-request-id', function () {
     });
 
     it('should pass options to node-uuid', function (done) {
-        var app = require('express')();
+        const app = require('express')();
         app.use(requestId({ uuidVersion: 'v1', msecs: new Date('10-05-1990'), nsecs: 0, clockseq: 0, node: [0,0,0,0,0,0] }));
         app.get('/', noop);
 
@@ -118,7 +118,7 @@ describe('express-request-id', function () {
             .end(done);
     });
     it('should set use the specified attribute name for the identifier', function (done) {
-        var app = require('express')();
+        const app = require('express')();
         app.use(requestId({ attributeName: 'specificId' }));
         app.get('/', function (req, res, next) {
             should.exist(req);
