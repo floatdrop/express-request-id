@@ -30,6 +30,6 @@
     "supertest": "~3.3.0"
   },
   "dependencies": {
-    "uuid": "^3.3.2"
+    "uuid": "^8.3.2"
   }
 }
