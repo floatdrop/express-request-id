@@ -1,20 +1,26 @@
-'use strict';
+import {v4 as uuidv4} from 'uuid';
 
-const uuid = require('uuid');
+function generateV4UUID(_request) {
+	return uuidv4();
+}
 
-module.exports = function (options) {
-    options = options || {};
-    options.uuidVersion = options.uuidVersion || 'v4';
-    options.setHeader = options.setHeader === undefined || !!options.setHeader;
-    options.headerName = options.headerName || 'X-Request-Id';
-    options.attributeName = options.attributeName || 'id';
-    options.requestIdGenerator = options.requestIdGenerator || uuid[options.uuidVersion].bind(undefined, options, options.buffer, options.offset);
+const ATTRIBUTE_NAME = 'id';
 
-    return function (req, res, next) {
-        req[options.attributeName] = req.headers[options.headerName.toLowerCase()] || options.requestIdGenerator();
-        if (options.setHeader) {
-            res.setHeader(options.headerName, req[options.attributeName]);
-        }
-        next();
-    };
-};
+export default function requestID({
+	generator = generateV4UUID,
+	headerName = 'X-Request-Id',
+	setHeader = true,
+} = {}) {
+	return function (request, response, next) {
+		const oldValue = request.get(headerName);
+		const id = oldValue === undefined ? generator(request) : oldValue;
+
+		if (setHeader) {
+			response.set(headerName, id);
+		}
+
+		request[ATTRIBUTE_NAME] = id;
+
+		next();
+	};
+}

@@ -1,7 +1,10 @@
-import 'express'
+import express from 'express';
 
-declare module 'express' {
-  interface Request {
-    id: string;
-  }
+declare global {
+	namespace Express {
+		// Inject additional properties on express.Request
+		interface Request {
+			id: string;
+		}
+	}
 }
