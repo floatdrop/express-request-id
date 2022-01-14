@@ -4,8 +4,9 @@ function generateV4UUID(_request) {
 	return uuidv4();
 }
 
+const ATTRIBUTE_NAME = 'id';
+
 export default function requestID({
-	attributeName = 'id',
 	generator = generateV4UUID,
 	headerName = 'X-Request-Id',
 } = {}) {
@@ -16,9 +17,7 @@ export default function requestID({
 			response.setHeader(headerName, id);
 		}
 
-		if (attributeName !== false) {
-			request[attributeName] = id;
-		}
+		request[ATTRIBUTE_NAME] = id;
 
 		next();
 	};
