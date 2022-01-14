@@ -1,6 +1,6 @@
 'use strict';
 
-var uuid = require('uuid');
+const uuid = require('uuid');
 
 module.exports = function (options) {
     options = options || {};
@@ -8,9 +8,10 @@ module.exports = function (options) {
     options.setHeader = options.setHeader === undefined || !!options.setHeader;
     options.headerName = options.headerName || 'X-Request-Id';
     options.attributeName = options.attributeName || 'id';
+    options.requestIdGenerator = options.requestIdGenerator || uuid[options.uuidVersion].bind(undefined, options, options.buffer, options.offset);
 
     return function (req, res, next) {
-        req[options.attributeName] = req.headers[options.headerName.toLowerCase()] || uuid[options.uuidVersion](options, options.buffer, options.offset);
+        req[options.attributeName] = req.headers[options.headerName.toLowerCase()] || options.requestIdGenerator();
         if (options.setHeader) {
             res.setHeader(options.headerName, req[options.attributeName]);
         }
