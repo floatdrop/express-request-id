@@ -39,6 +39,14 @@ app.listen(3000, function() {
 
 Type: `object`
 
+
+##### attributeName
+
+Type: `string` or `bool`
+Default: `id`
+
+Defines name of attribute, that should be used for request ID storing on request object. If `false` – attribute will not be set.
+
 ##### headerName
 
 Type: `string` or `bool`
