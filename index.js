@@ -12,7 +12,7 @@ export default function requestID({
 	return function (request, response, next) {
 		const id = generator(request);
 
-		if (headerName !== false) {
+		if (headerName !== false && request.headers[headerName] === undefined) {
 			response.setHeader(headerName, id);
 		}
 

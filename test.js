@@ -1,6 +1,8 @@
 import test from 'ava';
 import unicornFun from './index.js';
 
+// TODO: Add test on overwritting
+
 test('express-request-id', t => {
 	t.throws(() => {
 		unicornFun(123);
