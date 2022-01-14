@@ -39,16 +39,23 @@ app.listen(3000, function() {
 
 Type: `object`
 
-##### headerName
-
-Type: `string` or `bool`
-Default: `X-Request-Id`
-
-Defines name of header, that should be used for request ID checking and setting. If `false` – header will not be set.
-
 ##### generator
 
 Type: `function`
 Default: `func(req) { return uuidv4(); }`
 
 Defines function, that generated ID from request. By default used `uuid` module, that generated UUID V4 for every request. 
+
+##### headerName
+
+Type: `string`
+Default: `X-Request-Id`
+
+Defines name of header, that should be used for request ID checking and setting.
+
+##### setHeader
+
+Type: `bool`
+Default: `true`
+
+If `false` – header will not be set.
