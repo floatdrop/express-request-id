@@ -1,5 +1,5 @@
 import express from 'express';
-import { Request, RequestHandler } from 'express-serve-static-core';
+import {Request, RequestHandler} from 'express-serve-static-core';
 
 declare global {
 	namespace Express {
@@ -11,11 +11,11 @@ declare global {
 }
 
 declare namespace expressRequestId {
-    interface Options {
-        setHeader?: boolean | undefined;
-        headerName?: string | undefined;
-        generator?: (request: Request) => string | undefined;
-    }
+	interface Options {
+		setHeader?: boolean | undefined;
+		headerName?: string | undefined;
+		generator?: (request: Request) => string | undefined;
+	}
 }
 
 declare function expressRequestId(options?: expressRequestId.Options): RequestHandler;
