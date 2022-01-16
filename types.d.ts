@@ -14,7 +14,7 @@ declare namespace expressRequestId {
 	interface Options {
 		setHeader?: boolean | undefined;
 		headerName?: string | undefined;
-		generator?: (request: Request) => string | undefined;
+		generator?: ((request: Request) => string) | undefined;
 	}
 }
 
