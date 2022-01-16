@@ -19,7 +19,8 @@
 		"test": "xo && ava"
 	},
 	"files": [
-		"index.js"
+		"index.js",
+		"types.d.ts"
 	],
 	"keywords": [
 		"express",
