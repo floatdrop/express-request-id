@@ -1,4 +1,6 @@
-# express-request-id [![Tests](https://github.com/floatdrop/express-request-id/workflows/CI/badge.svg)](https://github.com/floatdrop/express-request-id/actions)
+# express-request-id
+
+[![Tests](https://github.com/floatdrop/express-request-id/workflows/CI/badge.svg)](https://github.com/floatdrop/express-request-id/actions)
 [![npm version](https://img.shields.io/npm/v/express-request-id.svg)](https://npmjs.org/package/express-request-id 'View this project on NPM')
 [![npm downloads](https://img.shields.io/npm/dm/express-request-id)](https://www.npmjs.com/package/express-request-id)
 
