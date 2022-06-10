@@ -36,6 +36,6 @@
 		"express": "^4.17.2",
 		"express-serve-static-core": "^0.1.1",
 		"supertest": "^6.2.1",
-		"xo": "^0.47.0"
+		"xo": "^0.50.0"
 	}
 }
