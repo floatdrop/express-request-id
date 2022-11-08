@@ -4,9 +4,11 @@ import type {Request, RequestHandler} from 'express-serve-static-core';
 declare global {
 	namespace Express {
 		// Inject additional properties on express.Request
-		type Request = {
+		// Should be interface to support declaration merging.
+		// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+		interface Request {
 			id: string;
-		};
+		}
 	}
 }
 
