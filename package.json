@@ -33,7 +33,7 @@
 		"uuid": "^9.0.0"
 	},
 	"devDependencies": {
-		"ava": "^4.0.1",
+		"ava": "^5.1.0",
 		"express": "^4.17.2",
 		"express-serve-static-core": "^0.1.1",
 		"supertest": "^6.2.1",
