@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "@baseland-io/eslint-config-baseland"
+  ]
+}

@@ -1,42 +1,48 @@
 {
-	"name": "express-request-id",
-	"version": "3.0.0",
-	"description": "Generate UUID for request",
-	"license": "MIT",
-	"repository": "floatdrop/express-request-id",
-	"author": {
-		"name": "Vsevolod Strukchinsky",
-		"email": "floatdrop@gmail.com",
-		"url": "https://floatdrop.me/"
-	},
-	"type": "module",
-	"exports": "./index.js",
-	"types": "./types.d.ts",
-	"engines": {
-		"node": "^14.20.1 || >=16.0.0"
-	},
-	"scripts": {
-		"test": "xo && ava"
-	},
-	"files": [
-		"index.js",
-		"types.d.ts"
-	],
-	"keywords": [
-		"express",
-		"middleware",
-		"request",
-		"id",
-		"uuid"
-	],
-	"dependencies": {
-		"uuid": "^9.0.0"
-	},
-	"devDependencies": {
-		"ava": "^4.0.1",
-		"express": "^4.17.2",
-		"express-serve-static-core": "^0.1.1",
-		"supertest": "^6.2.1",
-		"xo": "^0.52.4"
-	}
+  "name": "@baseland-io/express-request-id",
+  "version": "3.0.1",
+  "description": "Generate UUID for request",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baseland-io/express-request-id.git"
+  },
+  "author": "Developers <developers@baseland.io>",
+  "bugs": {
+    "url": "https://github.com/baseland-io/express-request-id/issues"
+  },
+  "homepage": "https://github.com/baseland-io/express-request-id#readme",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "prepublish": "npm run build",
+  "engines": {
+    "node": "^18.x"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "LOG_LEVEL=off nyc mocha -r ts-node/register -r tsconfig-paths/register --config .mocharc.json"
+  },
+  "keywords": [
+    "express",
+    "middleware",
+    "request",
+    "id",
+    "uuid"
+  ],
+  "dependencies": {
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@baseland-io/eslint-config-baseland": "^0.1.5",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "chai": "^4.3.10",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^8.56.0",
+    "express": "^4.18.2",
+    "express-serve-static-core": "^0.1.1",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "ts-mocha": "^10.0.0"
+  }
 }
