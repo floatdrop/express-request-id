@@ -1,26 +1,26 @@
-import {v4 as uuidv4} from 'uuid';
+import { NextFunction, Request, Response } from 'express-serve-static-core';
+import { Options } from 'types';
+import { v4 as uuidv4 } from 'uuid';
 
-function generateV4UUID(_request) {
-	return uuidv4();
-}
-
+const generateV4UUID = (_request: Request) => uuidv4();
 const ATTRIBUTE_NAME = 'id';
+const HEADER_NAME = 'X-Request-Id';
 
-export default function requestID({
-	generator = generateV4UUID,
-	headerName = 'X-Request-Id',
-	setHeader = true,
-} = {}) {
-	return function (request, response, next) {
-		const oldValue = request.get(headerName);
-		const id = oldValue === undefined ? generator(request) : oldValue;
+function requestId(options: Options = { }): any {
+  return (request: Request, response: Response, next: NextFunction): any => {
+    const {generator = generateV4UUID, headerName = HEADER_NAME, setHeader = true} = options;
+    const existingId: string | undefined = request.get(headerName);
+    const id: string = existingId === undefined ? generator(request) : existingId;
 
-		if (setHeader) {
-			response.set(headerName, id);
-		}
+    if (setHeader) {
+      response.set(headerName, id);
+    }
 
-		request[ATTRIBUTE_NAME] = id;
+    request[ATTRIBUTE_NAME] = id;
 
-		next();
-	};
+    // execute next function in the chain
+    next();
+  };
 }
+
+export default requestId;
