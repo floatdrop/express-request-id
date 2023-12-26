@@ -4,17 +4,16 @@
     "module": "commonjs",
     "outDir": "dist",
     "strict": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "declaration": true,
     "esModuleInterop": true,
     "noImplicitAny": false,
+    "skipLibCheck": true,
     "baseUrl": "./src",
-    "plugins": [{"transform": "typescript-transform-paths"}],
     "typeRoots": [
       "./src/types/**/*.d.ts",
       "node_modules/@types"
     ]
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "dist"],
   "include": ["src/**/*.ts", "tests/**/*.ts"]
 }

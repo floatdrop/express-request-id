@@ -8,7 +8,7 @@ const HEADER_NAME = 'X-Request-Id';
 
 function requestId(options: Options = { }): any {
   return (request: Request, response: Response, next: NextFunction): any => {
-    const {generator = generateV4UUID, headerName = HEADER_NAME, setHeader = true} = options;
+    const { generator = generateV4UUID, headerName = HEADER_NAME, setHeader = true } = options;
     const existingId: string | undefined = request.get(headerName);
     const id: string = existingId === undefined ? generator(request) : existingId;
 

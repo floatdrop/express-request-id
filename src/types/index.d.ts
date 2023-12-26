@@ -1,5 +1,6 @@
 import type { Request } from 'express-serve-static-core';
-export {}
+
+export { }
 
 export type Options = {
   generator?: ((_request: Request) => string);

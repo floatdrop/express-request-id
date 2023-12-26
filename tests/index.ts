@@ -1,19 +1,13 @@
 import express from 'express';
-import { validate } from 'uuid';
 import requestId from '../src';
 import { Express, Request, Response } from 'express-serve-static-core';
-import chai, { assert, expect } from 'chai';
 import { v4 as uuidv4 } from 'uuid';
-import chaiHttp from 'chai-http';
 import request from 'supertest';
 import http from 'http';
 
 const generateV4UUID = (_request: Request) => uuidv4();
 
 describe('default options', async () => {
-  // chai.use(chaiHttp);
-
-
   describe('using the default values', () => {
     let server: http.Server;
     let app: Express;
@@ -35,13 +29,10 @@ describe('default options', async () => {
       done();
     });
 
-    it('should set the request id using the default options', async function () {
-
-      console.log('start of test');
-
+    it('should set the request id using the default header option', async function () {
       try {
-        const r = await request(server).get('/').expect(200);
-        console.log(r.get('X-Request-Id'));
+        const response = await request(server).get('/').expect(200);
+        console.log(response.get('X-Request-Id'));
       } catch (error) {
         console.log(error);
       }

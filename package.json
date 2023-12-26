@@ -19,6 +19,7 @@
     "node": "^18.x"
   },
   "scripts": {
+    "build": "tsc",
     "lint": "eslint ./",
     "test": "LOG_LEVEL=off nyc mocha -r ts-node/register -r tsconfig-paths/register --config .mocharc.json"
   },
@@ -36,22 +37,21 @@
     "@baseland-io/eslint-config-baseland": "^0.1.5",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.11",
-    "@types/express": "^4.17.14",
+    "@types/express": "^4.17.21",
     "@types/express-serve-static-core": "^4.17.41",
     "@types/mocha": "^10.0.6",
     "@types/supertest": "^6.0.1",
     "@types/uuid": "^9.0.4",
+    "@typescript-eslint/parser": "^6.16.0",
     "chai": "^4.3.10",
-    "chai-as-promised": "^7.1.1",
-    "chai-http": "^4.4.0",
     "eslint": "^8.56.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "express": "^4.18.2",
     "express-serve-static-core": "^0.1.1",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "supertest": "^6.3.3",
-    "ts-mocha": "^10.0.0"
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.3.3"
   }
 }
