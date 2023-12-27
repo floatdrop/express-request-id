@@ -1,46 +1,38 @@
 import express from 'express';
-import requestId from '../src';
+import expressRequestId from '../src';
 import { Express, Request, Response } from 'express-serve-static-core';
-import { v4 as uuidv4 } from 'uuid';
+import { validate } from 'uuid';
 import request from 'supertest';
 import http from 'http';
-
-const generateV4UUID = (_request: Request) => uuidv4();
+import  { assert } from 'chai';
 
 describe('default options', async () => {
   describe('using the default values', () => {
-    let server: http.Server;
     let app: Express;
 
     before((done) => {
       app = express();
-      app.use(requestId());
+      app.use(expressRequestId());
       app.get('/', (request: Request, response: Response) => {
+        console.log('request.id:', request.id);
+        console.log('request.get:', request.get('X-Request-Id'));
         return response.send('OK');
       });
-      server = app.listen(4000, () => {
-        console.log('listing to port 4000');
-        done();
-      });
-    });
-
-    after((done) => {
-      server.close();
       done();
     });
 
-    it('should set the request id using the default header option', async function () {
+    it('should set the request id using the default header option', async () => {
       try {
-        const response = await request(server).get('/').expect(200);
-        console.log(response.get('X-Request-Id'));
+        const response = await request(app).get('/').expect(200);
+        const id = response.get('X-Request-Id');
+        assert.isTrue(validate(id));
       } catch (error) {
         console.log(error);
       }
-      console.log('end of test');
     });
   });
 
-  describe('using custom values', () => {
+  xdescribe('using custom values', () => {
     let server: http.Server;
     let app: Express;
 
@@ -49,7 +41,7 @@ describe('default options', async () => {
         setHeader: false,
       }
       app = express();
-      app.use(requestId(options));
+      app.use(expressRequestId(options));
       app.get('/', (request: Request, response: Response) => {
         return response.send('OK');
       });

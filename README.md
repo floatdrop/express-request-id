@@ -1,4 +1,4 @@
-# express-request-id
+# @baseland-io/express-request-id
 
 [![Tests](https://github.com/floatdrop/express-request-id/workflows/CI/badge.svg)](https://github.com/floatdrop/express-request-id/actions)
 [![npm version](https://img.shields.io/npm/v/express-request-id.svg)](https://npmjs.org/package/express-request-id 'View this project on NPM')
@@ -9,16 +9,16 @@
 ## Install
 
 ```sh
-npm install express-request-id
+npm install @baseland-io/express-request-id
 ```
 
 ## Usage
 
 ```js
 import express from 'express';
-import requestID from 'express-request-id';
+import expressRequestId from '@baseland-io/express-request-id';
 
-app.use(requestID());
+app.use(expressRequestId());
 
 app.get('/', function (req, res, next) {
     res.send(req.id);
@@ -35,7 +35,7 @@ app.listen(3000, function() {
 
 ## API
 
-### requestID(options?)
+### expressRequestId(options?)
 
 #### options
 
@@ -46,7 +46,7 @@ Type: `object`
 Type: `function`
 Default: `func(req) { return uuidv4(); }`
 
-Defines function, that generated ID from request. By default used `uuid` module, that generated UUID V4 for every request. 
+Defines function, that generated ID from request. By default used `uuid` module, that generated UUID V4 for every request.
 
 ##### headerName
 

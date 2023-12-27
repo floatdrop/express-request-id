@@ -1,7 +1,7 @@
 {
   "name": "@baseland-io/express-request-id",
   "version": "4.0.0",
-  "description": "Generate UUID for request",
+  "description": "Middleware to generate UUID for expressjs requests",
   "license": "MIT",
   "repository": {
     "type": "git",

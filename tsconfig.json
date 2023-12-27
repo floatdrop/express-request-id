@@ -9,6 +9,7 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "baseUrl": "./src",
+    "types": ["node", "mocha", "chai"],
     "typeRoots": [
       "./src/types/**/*.d.ts",
       "node_modules/@types"
