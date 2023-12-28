@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2019",
+    "target": "ES6",
     "module": "commonjs",
     "outDir": "dist",
     "strict": true,
@@ -11,10 +11,9 @@
     "baseUrl": "./src",
     "types": ["node", "mocha", "chai"],
     "typeRoots": [
-      "./src/types/**/*.d.ts",
       "node_modules/@types"
     ]
   },
   "exclude": ["node_modules", "dist"],
-  "include": ["src/**/*.ts", "tests/**/*.ts"]
+  "include": ["src/**/*.ts", "tests/**/*.ts", "./index.d.ts"]
 }

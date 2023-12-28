@@ -1,6 +1,12 @@
 import { NextFunction, Request, Response } from 'express-serve-static-core';
-import { Options } from 'types';
 import { v4 as uuidv4 } from 'uuid';
+
+export type Options = {
+  generator?: ((_request: Request) => string);
+  headerName?: string;
+  setHeader?: boolean;
+  attrName?: string;
+}
 
 const generateV4UUID = (_request: Request) => uuidv4();
 
@@ -16,14 +22,11 @@ const expressRequestId = (options: Options = { }): any => {
     if (setHeader) {
       response.set(headerName, id);
     }
-    console.log('id =', id);
-    // request.headers[headerName] = id;
-    request[headerName] = id;
+
     request[attrName] = id;
-    console.log('middleware: requestId.get() =', request.get(headerName));
-    console.log('middleware: request[headerName] =', request[headerName]);
+
     next();
   };
-}
+};
 
 export default expressRequestId;

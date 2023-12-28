@@ -1,4 +1,9 @@
 {
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
   "extends": [
     "@baseland-io/eslint-config-baseland"
   ],
@@ -14,5 +19,5 @@
         "caughtErrorsIgnorePattern": "^_"
       }
     ]
-  },
+  }
 }

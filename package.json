@@ -21,7 +21,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint ./",
-    "test": "LOG_LEVEL=off nyc mocha -r ts-node/register -r tsconfig-paths/register --config .mocharc.json"
+    "test": "LOG_LEVEL=off nyc mocha --config .mocharc.json"
   },
   "keywords": [
     "express",
@@ -51,7 +51,7 @@
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "supertest": "^6.3.3",
-    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
 }

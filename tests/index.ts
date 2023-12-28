@@ -4,7 +4,7 @@ import { Express, Request, Response } from 'express-serve-static-core';
 import { validate } from 'uuid';
 import request from 'supertest';
 import http from 'http';
-import  { assert } from 'chai';
+import { assert } from 'chai';
 
 describe('default options', async () => {
   describe('using the default values', () => {
@@ -14,8 +14,6 @@ describe('default options', async () => {
       app = express();
       app.use(expressRequestId());
       app.get('/', (request: Request, response: Response) => {
-        console.log('request.id:', request.id);
-        console.log('request.get:', request.get('X-Request-Id'));
         return response.send('OK');
       });
       done();
@@ -30,6 +28,7 @@ describe('default options', async () => {
         console.log(error);
       }
     });
+
   });
 
   xdescribe('using custom values', () => {
@@ -39,7 +38,7 @@ describe('default options', async () => {
     before((done) => {
       const options = {
         setHeader: false,
-      }
+      };
       app = express();
       app.use(expressRequestId(options));
       app.get('/', (request: Request, response: Response) => {
