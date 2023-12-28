@@ -7,6 +7,5 @@
   "timeout": "2000",
   "ui": "bdd",
   "recursive": true,
-  "require": "ts-node/register",
-  "exclude": ["dist"]
+  "require": "ts-node/register"
 }

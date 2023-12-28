@@ -7,63 +7,91 @@ import http from 'http';
 import { assert } from 'chai';
 
 describe('default options', async () => {
-  describe('using the default values', () => {
+  describe('using the default options', () => {
     let app: Express;
 
-    before((done) => {
+    it('should set the response header using the default `setHeader`', async () => {
+      app = express();
+      app.use(expressRequestId());
+      app.get('/', (request: Request, response: Response) => {
+        assert.isNotEmpty(request.id);
+        return response.send('OK');
+      });
+      const response = await request(app).get('/').expect(200);
+      assert.isNotEmpty(response.get('X-Request-Id'));
+    });
+
+    it('should use default generator', async () => {
       app = express();
       app.use(expressRequestId());
       app.get('/', (request: Request, response: Response) => {
         return response.send('OK');
       });
-      done();
+      const response = await request(app).get('/').expect(200);
+      const id = response.get('X-Request-Id');
+      // should generate a validate UUID
+      assert.isTrue(validate(id));
     });
 
-    it('should set the request id using the default header option', async () => {
-      try {
-        const response = await request(app).get('/').expect(200);
-        const id = response.get('X-Request-Id');
-        assert.isTrue(validate(id));
-      } catch (error) {
-        console.log(error);
-      }
+    it('should use the existing X-Request-Id if provided', async () => {
+      const existingRequestId = 'some-random-existing-request-id';
+      app = express();
+      app.use(expressRequestId());
+      app.get('/', (request: Request, response: Response) => {
+        return response.send('OK');
+      });
+      const response = await request(app)
+        .get('/')
+        .set('X-Request-Id', existingRequestId)
+        .expect(200);
+      const id = response.get('X-Request-Id');
+      assert.isTrue(id === existingRequestId);
     });
-
   });
 
-  xdescribe('using custom values', () => {
-    let server: http.Server;
+  describe('using the custom options', () => {
     let app: Express;
 
-    before((done) => {
+    it('should avoid setting the response header when `setHeader` is `false`', async () => {
       const options = {
         setHeader: false,
       };
       app = express();
       app.use(expressRequestId(options));
       app.get('/', (request: Request, response: Response) => {
+        assert.isNotEmpty(request.id);
         return response.send('OK');
       });
-      server = app.listen(4000, () => {
-        console.log('listing to port 4000');
-        done();
+      const response = await request(app).get('/').expect(200);
+      assert.isUndefined(response.get('X-Request-Id'));
+    });
+
+    it('should use a custom generator', async () => {
+      const string = 'fake-generator';
+      const options = {
+        generator: () => string,
+      };
+      app = express();
+      app.use(expressRequestId(options));
+      app.get('/', (request: Request, response: Response) => {
+        return response.send('OK');
       });
+      const response = await request(app).get('/').expect(200);
+      const id = response.get('X-Request-Id');
+      assert.isTrue(id === string);
     });
 
-    after((done) => {
-      server.close();
-      done();
-    });
-
-    it('should not set the resopnse header value when the `setHeader value us false', async () => {
-
-      try {
-        const r = await request(server).get('/').expect(200);
-        console.log(r.get('X-Request-Id'));
-      } catch (error) {
-        console.log(error);
-      }
-      console.log('end of test');
+    it('should use a custom header name', async () => {
+      const options = {
+        headerName: 'X-Custom-Name-Id',
+      };
+      app = express();
+      app.use(expressRequestId(options));
+      app.get('/', (request: Request, response: Response) => {
+        return response.send('OK');
+      });
+      const response = await request(app).get('/').expect(200);
+      assert.isNotEmpty(response.get(options.headerName));
     });
   });
 });

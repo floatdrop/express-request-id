@@ -14,6 +14,12 @@
       "node_modules/@types"
     ]
   },
+  "ts-node": {
+    "files": true
+  },
+  "files": [
+    "index.d.ts"
+  ],
   "exclude": ["node_modules", "dist"],
   "include": ["src/**/*.ts", "tests/**/*.ts", "./index.d.ts"]
 }
